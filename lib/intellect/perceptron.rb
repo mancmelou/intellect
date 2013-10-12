@@ -7,7 +7,7 @@ module Intellect
       @weights    = generate_weights(layers) || [1]
     end
     
-    private 
+    private
     
     def generate_weight(layers)
       @weights = layers.inject([]) do |layer, nodes|
