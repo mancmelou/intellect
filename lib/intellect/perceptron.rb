@@ -13,6 +13,9 @@ module Intellect
     def eval(input)
     end
     
+    def feedforward(input) 
+    end
+    
     private
     
     def generate_weights(size)
