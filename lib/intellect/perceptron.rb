@@ -1,4 +1,6 @@
 module Intellect
+  class InputSizeError = Class.new(RuntimeError)
+    
   class Network
     attr_reader :network
     
@@ -28,6 +30,7 @@ module Intellect
     end
     
     def feedforward(input = [])
+      raise InputSizeError unless input.size == weight.size
       sum = 0
       
       input.each_with_index do |n, i|
