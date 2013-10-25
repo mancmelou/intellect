@@ -1,5 +1,5 @@
 module Intellect
-  class InputSizeError = Class.new(RuntimeError)
+  InputSizeError = Class.new(RuntimeError)
     
   class Network
     attr_reader :network
