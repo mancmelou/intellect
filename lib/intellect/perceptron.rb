@@ -24,7 +24,7 @@ module Intellect
     
     def initialize(n_inputs, activation = nil)
       @activate = activation || lambda { |x| 1 / (1 + Math.exp(-1 * x)) }
-      generate_weights(n_inputs)
+      @weights  = generate_weights(n_inputs)
     end
     
     def feedforward(input = [])
