@@ -30,7 +30,7 @@ module Intellect
     end
     
     def feedforward(input = [])
-      raise InputSizeError unless input.size == weight.size
+      raise InputSizeError unless input.size == weights.size
       sum = 0
       
       input.each_with_index do |n, i|
