@@ -2,16 +2,28 @@ module Intellect
   InputSizeError = Class.new(RuntimeError)
     
   class Network
-    attr_reader :network, :inputs, :outputs, :layers
+    attr_reader :network, :n_inputs, :n_outputs, :layers
     
     def initialize(topology = [], opts = {})
       @network = []
       
-      inputs, *layers, outputs = topology
-      puts layers
+      n_inputs, *layers, n_outputs = topology
+      
       layers.each do |n|
         @network << n.times.reduce([]) { |sum, i| sum << Perceptron.new(n) }
       end
+    end
+    
+    def eval(input = [])
+      raise InputSizeError if input.size != n_inputs
+      
+      output = input.clone
+      
+      network.each do |layer|
+        output = layer.reduce([]) { |sum, n| sum << n.feedforward(output) }
+      end
+      
+      output
     end
   end
   
