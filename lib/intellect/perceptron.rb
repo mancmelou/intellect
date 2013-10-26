@@ -2,21 +2,15 @@ module Intellect
   InputSizeError = Class.new(RuntimeError)
     
   class Network
-    attr_reader :network
+    attr_reader :network, :inputs, :outputs, :layers
     
-    def initialize(layers = [], opts = {})
+    def initialize(topology = [], opts = {})
       @network = []
+      
+      inputs, *layers, outputs = topology
       
       layers.each do |n|
         @network << n.times.reduce([]) { |sum, i| sum + Perceptron.new(i) }
-      end
-    end
-    
-    private
-    
-    def generate_weights!(layers)
-      @weights = layers.inject([]) do |layer, nodes|
-        layer << nodes.times.inject([]) { |s, n| s << rand }
       end
     end
   end
