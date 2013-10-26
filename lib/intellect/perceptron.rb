@@ -8,9 +8,9 @@ module Intellect
       @network = []
       
       inputs, *layers, outputs = topology
-      
+      puts layers
       layers.each do |n|
-        @network << n.times.reduce([]) { |sum, i| sum + Perceptron.new(i) }
+        @network << n.times.reduce([]) { |sum, i| sum << Perceptron.new(n) }
       end
     end
   end
