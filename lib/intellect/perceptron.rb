@@ -38,6 +38,12 @@ module Intellect
       output
     end
 
+    def train(input, result)
+    end
+    
+    def backpropagate(expected, returned)
+    end
+    
     def inspect
       "== n_inputs=#{n_inputs} n_outputs=#{n_outputs} layers=#{layers} == \n" + super
     end
