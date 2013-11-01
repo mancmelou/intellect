@@ -3,15 +3,17 @@ module Intellect
   InputSizeError = Class.new(IntellectError)
     
   class Network
-    attr_reader :network, :layers, :n_inputs, :n_outputs
+    attr_reader :network, :layers, :n_inputs, :n_outputs, :learn_rate
     
     def initialize(layers = [], opts = {})
       @network    = []
       @n_inputs   = layers.first
       @n_outputs  = layers.last
-
-      activation = opts[:activation]
-
+      @learn_rate = opts[:learn_rate] || 0.25
+      
+      activation  = opts[:activation]
+      
+      # extract to a private method
       layers.each_index do |i|
         if i == 0
           inputs = layers.first
@@ -52,6 +54,13 @@ module Intellect
     private 
     
     def backpropagate(error)
+      network.each do |layer|
+        layer.each do |perceptron|
+          perceptron.weights.each do |weight|
+            weight = weight + error * input * learn_rate
+          end
+        end
+      end
     end
   end
   
